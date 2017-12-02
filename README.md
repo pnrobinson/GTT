@@ -18,3 +18,9 @@ The CMake script will cause cmake to download (via git clone) the googletest cod
 ```
 $ make
 ```
+
+To enable testing, enter
+```
+$ cmake -Dtest=ON ../..
+$ make test
+```
