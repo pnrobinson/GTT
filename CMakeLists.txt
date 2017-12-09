@@ -22,6 +22,16 @@ if(result)
 endif()
 
 
+## Set up SeqAn
+
+# Search for zlib as a dependency for SeqAn.
+find_package (ZLIB)
+
+
+# Load the SeqAn module and fail if not found.
+#find_package (SeqAn REQUIRED  )
+
+
 
 # EXCLUDE_FROM_ALL
 # Now simply link against gtest or gtest_main as needed. Eg
@@ -65,41 +75,5 @@ endif()
 set(TARGET project)
 add_executable(fase main.cpp)
 
-
-#set(GTEST_TARGET ${TARGET}_GTest)
-#file(GLOB_RECURSE TESTS_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
-
-
-
-#add_executable(${TARGET} main.cpp)
-#add_executable(${GTEST_TARGET} test_project1.cpp)
-#add_dependencies(${GTEST_TARGET} gtest gtest_main )
-
-#target_link_libraries(${GTEST_TARGET} gtest gtest_main)
-
-
-
-
-#add_executable(gtt main.cpp)
-# tests definition
-#set(TARGET project)
-#set(GTEST_TARGET ${TARGET}_GTest)
-#file(GLOB_RECURSE TESTS_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
-
-#add_executable(${GTEST_TARGET} ${TESTS_FILES})
-#include_directories(
-#  ${source}
-#  ${source_dir}/include
-#  ${PROJECT_SOURCE_DIR}/include
-#)
-#add_dependencies(${GTEST_TARGET} gtest)
-#target_link_libraries(${GTEST_TARGET} 
-#  ${TARGET}
-## TODO OP should work but with something around ENABLE_EXPORTS
-##  gtest gtest_main
-#  ${binary_dir}/${CMAKE_STATIC_LIBRARY_PREFIX}gtest${CMAKE_STATIC_LIBRARY_SUFFIX}
-#  ${binary_dir}/${CMAKE_STATIC_LIBRARY_PREFIX}gtest_main${CMAKE_STATIC_LIBRARY_SUFFIX}
-#  pthread
-#)
 
 
