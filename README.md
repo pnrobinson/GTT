@@ -5,10 +5,17 @@ This repository provides a simple example of how to use CMake to compile a C++ p
 
 
 ## Install SeqAn
-[SeqAn](http://www.seqan.de/) is an extremely powerful C++ template library for the analysis of biological sequences. There is an extensive [documentation](http://seqan.readthedocs.io/en/master/index.html#) for getting started. Please consult [this page}(http://seqan.readthedocs.io/en/master/Infrastructure/Use/Install.html#infra-use-install) for information on how to install SeqAn on your system. For instance, to install SeqAN on an Ubuntu system, enter the following command.
+[SeqAn](http://www.seqan.de/) is an extremely powerful C++ template library for the analysis of biological sequences. There is an extensive [documentation](http://seqan.readthedocs.io/en/master/index.html#) for getting started. Please consult [this page}(http://seqan.readthedocs.io/en/master/Infrastructure/Use/Install.html#infra-use-install) for information on how to install SeqAn on your system. Currently, the recommended way is to install from GitHub.
 ```
-sudo apt install seqan-dev
+$ git clone https://github.com/seqan/seqan.git
 ```
+
+We will need to use the paths to two subdirectories.
+  seqan
+  ..include
+  ..util/cmake
+
+I will refer to the path to the cloned seqn directory as /path/to/seqan, but obviously replace this with the correct values for your system.
 
 
 

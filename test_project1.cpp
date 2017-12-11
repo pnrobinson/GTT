@@ -60,3 +60,8 @@ TEST_F(Project1Test, MethodBarDoesAbc) {
 }
 
 // }  // namespace - could surround Project1Test in a namespace
+
+int main(int argc, char **argv) {
+  testing::InitGoogleTest(&argc,argv);
+  return RUN_ALL_TESTS();
+}

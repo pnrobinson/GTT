@@ -5,6 +5,7 @@ project (fase)
 option(test "Build all tests." OFF)
 set(PROJECT_NAME fase)
 set(CMAKE_CXX_FLAGS "-g -Wall")
+set(CMAKE_CXX_STANDARD 11) ## use C++11
 
 ## Download and build gtest
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
@@ -23,13 +24,22 @@ endif()
 
 
 ## Set up SeqAn
+## Set this to the path for seqan
+## for instance, if you have a directory called GIT in your home directory
+## and you clone SeqAn into this directory
+## $ git clone https://github.com/seqan/seqan.git
+## then the cloned directory has a subdirectory called util/cmake
+## and another subdirectory called include.
+## Set the paths as follows (before calling find_package(SeqAn):
+#CMAKE_PREFIX_PATH="/path/to/seqan/util/cmake"
+#SEQAN_INCLUDE_PATH="/path/to/seqan/include"
+## Alternatively, set this from the command line as described in the README.
 
 # Search for zlib as a dependency for SeqAn.
 find_package (ZLIB)
 
-
 # Load the SeqAn module and fail if not found.
-#find_package (SeqAn REQUIRED  )
+find_package (SeqAn REQUIRED)
 
 
 
@@ -44,6 +54,9 @@ find_package (ZLIB)
 #set(PROJECT_NAME gtt)
 #project(${PROJECT_NAME})
 
+
+## Set up unit testing with gtest
+## need to call cmake -Dtest=ON ../.. from command line
 
 if (test)
   if (APPLE)
@@ -63,17 +76,22 @@ if (test)
   #add_subdirectory(${CMAKE_BINARY_DIR}/googletest-build)
   enable_testing()
   include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
-  add_executable(runUnitTests test_project1.cpp)
+  add_executable(runUnitTests test_project1.cpp project1.cpp)
   target_link_libraries(runUnitTests gtest gtest_main)
-  add_test(NAME runUnitTests COMMAND runUnitTests)
+  #add_test(NAME runUnitTests COMMAND runUnitTests)
 
   # You can also omit NAME and COMMAND. The second argument could be some other
   # test executable.
   #add_test(ResetsToZero2 gttest)
 endif()
+
+
+## Now set up the executable
+
+include_directories(.)
   
 set(TARGET project)
-add_executable(fase main.cpp)
+add_executable(fase main.cpp project1.cpp)
 
 
 
