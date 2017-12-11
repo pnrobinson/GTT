@@ -1,38 +1,36 @@
 #include <iostream>
 #include "gtest/gtest.h"
 
-#include "project1.h"
+#include "sequence.h"
 
+using namespace seqan;
 
-// IndependentMethod is a test case - here, we have 2 tests for this 1 test case
-TEST(IndependentMethod, ResetsToZero) {
-	int i = 3;
-	independentMethod(i);
-	EXPECT_EQ(0, i);
-
-	i = 12;
-	independentMethod(i);
-	EXPECT_EQ(0,i);
+TEST(getRevComp, FindsReverseComplement) {
+  seqan::DnaString myseq="ACGT";
+  seqan::DnaString expected="TCGA";
+  getRevComp(myseq);
+  EXPECT_EQ(expected, myseq);
 }
 
-TEST(IndependentMethod, ResetsToZero2) {
-	int i = 0;
-	independentMethod(i);
-	EXPECT_EQ(0, i);
+TEST(IndependentMethod, FindsReverseComplement2) {
+  seqan::DnaString myseq="AA";
+  seqan::DnaString expected="TT";
+  getRevComp(myseq);
+  EXPECT_EQ(expected, myseq);
 }
 
 // The fixture for testing class Project1. From google test primer.
-class Project1Test : public ::testing::Test {
+class SequenceTest : public ::testing::Test {
 protected:
 	// You can remove any or all of the following functions if its body
 	// is empty.
 
-	Project1Test() {
-		// You can do set-up work for each test here.
+	SequenceTest() {
+	  // do set-up work for each test here.
 	}
 
-	virtual ~Project1Test() {
-		// You can do clean-up work that doesn't throw exceptions here.
+	virtual ~SequenceTest() {
+	  // You can do clean-up work that doesn't throw exceptions here.
 	}
 
 	// If the constructor and destructor are not enough for setting up
@@ -48,15 +46,17 @@ protected:
 	}
 
 	// Objects declared here can be used by all tests in the test case for Project1.
-	Project1 p;
+	Sequence s;
 };
 
 // Test case must be called the class above
 // Also note: use TEST_F instead of TEST to access the test fixture (from google test primer)
-TEST_F(Project1Test, MethodBarDoesAbc) {
-	int i = 0;
-	p.foo(i); // we have access to p, declared in the fixture
-	EXPECT_EQ(1, i);
+TEST_F(SequenceTest, MethodBarDoesAbc) {
+  seqan::Dna5String myseq="ACGTNTTC";
+  int expected=4; // first N is at position 4
+  // Note we get access to Sequence s, as declared in the fixture!
+  int actual=s.position_of_first_N(myseq);
+  EXPECT_EQ(expected, actual);
 }
 
 // }  // namespace - could surround Project1Test in a namespace

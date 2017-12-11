@@ -41,20 +41,6 @@ find_package (ZLIB)
 # Load the SeqAn module and fail if not found.
 find_package (SeqAn REQUIRED)
 
-
-
-# EXCLUDE_FROM_ALL
-# Now simply link against gtest or gtest_main as needed. Eg
-#add_executable(my_gtest test_project1.cpp)
-#target_link_libraries(my_gtest gtest_main)
-#add_test(NAME example_test COMMAND my_gtest)
-
-
-# Make PROJECT_SOURCE_DIR, PROJECT_BINARY_DIR, and PROJECT_NAME available.
-#set(PROJECT_NAME gtt)
-#project(${PROJECT_NAME})
-
-
 ## Set up unit testing with gtest
 ## need to call cmake -Dtest=ON ../.. from command line
 
@@ -70,13 +56,12 @@ if (test)
   # Add googletest directly to our build. This defines
   # the gtest and gtest_main targets.
   add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src
-    ${CMAKE_BINARY_DIR}/googletest-build
-                )
+    ${CMAKE_BINARY_DIR}/googletest-build)
 
   #add_subdirectory(${CMAKE_BINARY_DIR}/googletest-build)
   enable_testing()
   include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
-  add_executable(runUnitTests test_project1.cpp project1.cpp)
+  add_executable(runUnitTests test_sequence.cpp sequence.cpp)
   target_link_libraries(runUnitTests gtest gtest_main)
   #add_test(NAME runUnitTests COMMAND runUnitTests)
 
@@ -91,7 +76,7 @@ endif()
 include_directories(.)
   
 set(TARGET project)
-add_executable(fase main.cpp project1.cpp)
+add_executable(fase main.cpp sequence.cpp)
 
 
 
