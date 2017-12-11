@@ -18,26 +18,25 @@ We will need to use the paths to two subdirectories.
 I will refer to the path to the cloned seqn directory as /path/to/seqan, but obviously replace this with the correct values for your system.
 
 
-
-
-## What are the files
-
-
+## Building
+To build the projects, we will create a new directory called build. We need to tell CMake the paths to Seqan as follows (note the name of the application is fase).
 
 ```
-$ mkdir -p build/release
-$ cd build/release
-$ cmake ../..
-```
-
-The CMake script will cause cmake to download (via git clone) the googletest code into the 'release' subdirectory. It will also generate a number of files in the 'release' subdirectory, including the Makefile. Now enter
-
-```
+$ mkdir build
+$ cd build
+$ cmake -DCMAKE_PREFIX_PATH=/path/to/seqan/util/cmake -DSEQAN_INCLUDE_PATH=~/path/to/seqan/include ..
 $ make
+./fase
 ```
 
-To enable testing, enter
+To create unit tests, enter the following commands
+
 ```
-$ cmake -Dtest=ON ../..
-$ make test
+$ mkdir build
+$ cd build
+$ cmake -DCMAKE_PREFIX_PATH=/path/to/seqan/util/cmake -DSEQAN_INCLUDE_PATH=~/path/to/seqan/include -Dtest=ON ..
+$ make
+./runUnitTests
 ```
+
+The first time it is run, the CMake script will cause cmake to download (via git clone) the googletest code into the 'build' subdirectory. It will also generate a number of files in the 'build' subdirectory, including the Makefile.
