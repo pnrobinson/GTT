@@ -8,14 +8,14 @@ using namespace seqan;
 TEST(getRevComp, FindsReverseComplement) {
   seqan::DnaString myseq="ACGT";
   seqan::DnaString expected="TCGA";
-  getRevComp(myseq);
+  revComp(myseq);
   EXPECT_EQ(expected, myseq);
 }
 
 TEST(IndependentMethod, FindsReverseComplement2) {
   seqan::DnaString myseq="AA";
   seqan::DnaString expected="TT";
-  getRevComp(myseq);
+  revComp(myseq);
   EXPECT_EQ(expected, myseq);
 }
 

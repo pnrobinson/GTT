@@ -1,11 +1,23 @@
 #include "sequence.h"
 
-#include <iostream> 
+#include <iostream>
+
+seqan::Dna getRevCompl(seqan::Dna const & nucleotide){
+  if (nucleotide == 'A')
+    return 'T';
+  if (nucleotide == 'T')
+    return 'A';
+  if (nucleotide == 'C')
+    return 'G';
+  return 'C';
+}
 
 // reverse complement "seq" in-place
 // using the SeqAn "reverseComplement" function
-seqan::Dna getRevComp(seqan::DnaString &seq) {
-  reverseComplement(seq);
+void revComp(seqan::DnaString &seq) {
+  seqan::DnaString tmp(seq);
+  for (unsigned i = 0; i < length(seq); ++i)
+    seq[length(seq) - 1 - i] = getRevCompl(tmp[i]);
 }
 
 
