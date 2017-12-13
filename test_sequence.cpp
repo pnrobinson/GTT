@@ -7,9 +7,11 @@
 using namespace seqan;
 
 TEST(getRevComp, FindsReverseComplement) {
-  seqan::DnaString myseq="ACGT";
-  seqan::DnaString expected="TCGA";
+  seqan::DnaString myseq="ACGTC";
+  seqan::DnaString expected="GACGT";
+  //std::cout<<"before "<<myseq<<"\n";
   revComp(myseq);
+  //std::cout<<"after "<<myseq<<"\n";
   EXPECT_EQ(expected, myseq);
 }
 
