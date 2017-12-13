@@ -1,5 +1,4 @@
-# Google test test (GTT)
-GTestTest
+# SeqAn GTest CMake Framework
 
 This repository provides a simple example of how to use CMake to compile a C++ project that makes use of both google test and SeqAn.
 
