@@ -1,6 +1,7 @@
 #include <iostream>
 #include "gtest/gtest.h"
 
+#include <seqan/stream.h>
 #include "sequence.h"
 
 using namespace seqan;
