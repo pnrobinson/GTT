@@ -5,7 +5,7 @@ project (fase)
 option(test "Build all tests." OFF)
 set(PROJECT_NAME fase)
 set(CMAKE_CXX_FLAGS "-g -Wall")
-set(CMAKE_CXX_STANDARD 11) ## use C++11
+set(CMAKE_CXX_STANDARD 14) ## use C++14 [required by seqan2.4]
 
 ## Download and build gtest
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
@@ -41,6 +41,11 @@ find_package (ZLIB)
 # Load the SeqAn module and fail if not found.
 find_package (SeqAn REQUIRED)
 
+# set required flags, definitions and includes for seqan
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${SEQAN_CXX_FLAGS}")
+include_directories(${SEQAN_INCLUDE_DIRS})
+add_definitions (${SEQAN_DEFINITIONS})
+
 ## Set up unit testing with gtest
 ## need to call cmake -Dtest=ON ../.. from command line
 
@@ -63,6 +68,7 @@ if (test)
   include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
   add_executable(runUnitTests test_sequence.cpp sequence.cpp)
   target_link_libraries(runUnitTests gtest gtest_main)
+  target_link_libraries(runUnitTests ${SEQAN_LIBRARIES})
   #add_test(NAME runUnitTests COMMAND runUnitTests)
 
   # You can also omit NAME and COMMAND. The second argument could be some other
@@ -77,6 +83,4 @@ include_directories(.)
   
 set(TARGET project)
 add_executable(fase main.cpp sequence.cpp)
-
-
-
+target_link_libraries(fase ${SEQAN_LIBRARIES})
