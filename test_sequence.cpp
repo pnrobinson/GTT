@@ -15,7 +15,7 @@ TEST(getRevComp, FindsReverseComplement) {
   EXPECT_EQ(expected, myseq);
 }
 
-TEST(IndependentMethod, FindsReverseComplement2) {
+TEST(IndependentMetho, FindsReverseComplement2) {
   seqan::DnaString myseq="AA";
   seqan::DnaString expected="TT";
   revComp(myseq);

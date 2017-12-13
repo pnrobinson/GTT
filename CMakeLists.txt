@@ -69,11 +69,11 @@ if (test)
   add_executable(runUnitTests test_sequence.cpp sequence.cpp)
   target_link_libraries(runUnitTests gtest gtest_main)
   target_link_libraries(runUnitTests ${SEQAN_LIBRARIES})
-  #add_test(NAME runUnitTests COMMAND runUnitTests)
+  add_test(NAME runUnitTests COMMAND runUnitTests)
 
   # You can also omit NAME and COMMAND. The second argument could be some other
   # test executable.
-  #add_test(ResetsToZero2 gttest)
+  add_test(ResetsToZero2 runUnitTests)
 endif()
 
 
