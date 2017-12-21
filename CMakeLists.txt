@@ -30,8 +30,10 @@ execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
 if(result)
   message(FATAL_ERROR "CMake step for seqan failed: ${result}")
 endif()
-set (CMAKE_MODULE_PATH "seqan/util/cmake")
-execute_process(COMMAND ls .
+set (CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR}/seqan/util/cmake)
+set (SEQAN_INCLUDE_PATH ${CMAKE_BINARY_DIR}/seqan/include)
+
+execute_process(COMMAND ${CMAKE_COMMAND} --build .
   RESULT_VARIABLE result
   WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/seqan-download )
 if(result)
@@ -39,25 +41,7 @@ if(result)
 endif()
 
 
-message(STATUS "seqan directory at ${CMAKE_BINARY_DIR}/seqan-download")
-
-#include_directories("seqan/util/cmake")
-set (_CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/seqan/util/cmake")
-#include_directories(${EXTERNAL_INSTALL_LOCATION}/include)
-#link_directories(${EXTERNAL_INSTALL_LOCATION}/lib)
-
-
-## Set up SeqAn
-## Set this to the path for seqan
-## for instance, if you have a directory called GIT in your home directory
-## and you clone SeqAn into this directory
-## $ git clone https://github.com/seqan/seqan.git
-## then the cloned directory has a subdirectory called util/cmake
-## and another subdirectory called include.
-## Set the paths as follows (before calling find_package(SeqAn):
-#CMAKE_PREFIX_PATH="/path/to/seqan/util/cmake"
-#SEQAN_INCLUDE_PATH="/path/to/seqan/include"
-## Alternatively, set this from the command line as described in the README.
+#message(STATUS "seqan directory at ${CMAKE_BINARY_DIR}/seqan-download")
 
 # Search for zlib as a dependency for SeqAn.
 find_package (ZLIB)
