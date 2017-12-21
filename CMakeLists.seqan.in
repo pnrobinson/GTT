@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.0.0)
+
+project(seqan-download NONE)
+
+include(ExternalProject)
+
+
+
+ExternalProject_Add(seqan
+  GIT_REPOSITORY    https://github.com/seqan/seqan
+  GIT_TAG           develop
+  SOURCE_DIR        "${CMAKE_BINARY_DIR}/seqan"
+  CONFIGURE_COMMAND ""
+  BUILD_COMMAND     ""
+  INSTALL_COMMAND   ""
+  TEST_COMMAND      ""
+)

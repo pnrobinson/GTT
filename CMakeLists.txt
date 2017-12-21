@@ -22,6 +22,30 @@ if(result)
   message(FATAL_ERROR "Build step for googletest failed: ${result}")
 endif()
 
+## Download seqan from GitHub
+configure_file(CMakeLists.seqan.in seqan-download/CMakeLists.txt)
+execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
+  RESULT_VARIABLE result
+  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/seqan-download )
+if(result)
+  message(FATAL_ERROR "CMake step for seqan failed: ${result}")
+endif()
+set (CMAKE_MODULE_PATH "seqan/util/cmake")
+execute_process(COMMAND ls .
+  RESULT_VARIABLE result
+  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/seqan-download )
+if(result)
+  message(FATAL_ERROR "Build step for googletest failed: ${result}")
+endif()
+
+
+message(STATUS "seqan directory at ${CMAKE_BINARY_DIR}/seqan-download")
+
+#include_directories("seqan/util/cmake")
+set (_CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/seqan/util/cmake")
+#include_directories(${EXTERNAL_INSTALL_LOCATION}/include)
+#link_directories(${EXTERNAL_INSTALL_LOCATION}/lib)
+
 
 ## Set up SeqAn
 ## Set this to the path for seqan
