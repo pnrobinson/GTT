@@ -9,27 +9,6 @@ Using the CMake files provided, there is no need to install SeqAn separately. Ho
 $ git clone https://github.com/seqan/seqan.git
 ```
 
-Note there is an issue surrounding an ambiguous template instantiation, see here
-https://github.com/seqan/seqan/pull/2183
-
-The following template needs to be added to
-include/seqan/sequence/string_base.h.
-This PR is still (2017-12-13) outstanding.
-
-```
-//github.com/seqan/seqan/issues/2182
- template <typename TValue_, typename TTraits_, typename TValue, typename TSpec>
- inline std::basic_ostream<TValue_, TTraits_> &
- operator<<(std::basic_ostream<TValue_, TTraits_> & target,
-            String<TValue, TSpec> const & source)
- {
-     auto it = directionIterator(target, Output());
-     write(it, source);
-     return target;
- }
- ```
- 
- 
 
 
 
